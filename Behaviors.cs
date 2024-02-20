@@ -1,4 +1,4 @@
-﻿namespace teal_haden;
+﻿namespace TealHadenBehaviors;
 using Discord;
 using Discord.Rest;
 using Discord.WebSocket;

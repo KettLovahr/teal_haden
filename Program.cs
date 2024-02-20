@@ -1,6 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using teal_haden;
+using TealHadenBehaviors;
 
 internal class Program
 {
