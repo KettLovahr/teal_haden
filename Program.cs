@@ -23,7 +23,6 @@ internal class Program
         _client = new DiscordSocketClient(socket_config);
 
         _client.Log += Log;
-        //_client.MessageReceived += MessageReceived;
         _client.ThreadCreated += ThreadCreated;
         _client.ReactionAdded += ReactionAdded;
         _client.ReactionRemoved += ReactionRemoved;
@@ -38,12 +37,6 @@ internal class Program
     public static Task Log(LogMessage msg)
     {
         Console.WriteLine("LOG- {0}", msg.Message);
-        return Task.CompletedTask;
-    }
-
-    // Unused
-    public static Task MessageReceived(SocketMessage msg)
-    {
         return Task.CompletedTask;
     }
 
