@@ -1,21 +1,26 @@
 ﻿using Discord;
 using Discord.WebSocket;
+using Newtonsoft.Json;
 using TealHadenBehaviors;
 
 internal class Program
 {
     private static DiscordSocketClient? _client;
 
+    public struct Config {
+        public string token;
+    }
+
     private static async Task Main(string[] args)
     {
-        string token = args[0];
+        Config bot_config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("./config.json"));
 
-        DiscordSocketConfig config = new DiscordSocketConfig
+        DiscordSocketConfig socket_config = new DiscordSocketConfig
         {
             GatewayIntents = GatewayIntents.All,
             MessageCacheSize = 100,
         };
-        _client = new DiscordSocketClient(config);
+        _client = new DiscordSocketClient(socket_config);
 
         _client.Log += Log;
         //_client.MessageReceived += MessageReceived;
@@ -24,7 +29,7 @@ internal class Program
         _client.ReactionRemoved += ReactionRemoved;
 
 
-        await _client.LoginAsync(TokenType.Bot, token);
+        await _client.LoginAsync(TokenType.Bot, bot_config.token);
         await _client.StartAsync();
 
         await Task.Delay(-1);
