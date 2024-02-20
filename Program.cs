@@ -122,6 +122,7 @@ internal class Program
                         }
                         Console.WriteLine("User already created a thread '{0}'", thread.Name);
                         await chan.DeleteAsync();
+                        break;
                     }
                 }
             }
