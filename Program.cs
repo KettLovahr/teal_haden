@@ -9,11 +9,12 @@ internal class Program
 
     public struct Config {
         public string token;
+        public ulong dorms_role;
     }
 
     private static async Task Main(string[] args)
     {
-        Config bot_config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("./config.json"));
+        Config bot_config = GetConfig();
 
         DiscordSocketConfig socket_config = new DiscordSocketConfig
         {
@@ -42,7 +43,7 @@ internal class Program
 
     public static async Task ThreadCreated(SocketThreadChannel chan)
     {
-        await Behaviors._DeleteDormsThreadIfAlreadyPresent(chan);
+        await Behaviors._DormsThreadCheck(chan, GetConfig().dorms_role);
         return;
     }
 
@@ -62,5 +63,8 @@ internal class Program
         await Behaviors._UnpinMessageOnReact(message, channel, reaction);
     }
 
+    private static Config GetConfig() {
+        return JsonConvert.DeserializeObject<Config>(File.ReadAllText("./config.json"));
+    }
 
 }

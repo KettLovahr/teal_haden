@@ -19,6 +19,7 @@ public class Behaviors
             if (count >= 5) { await message.PinAsync(); }
         }
     }
+
     public static async Task _UnpinMessageOnReact(IUserMessage message, IMessageChannel channel, SocketReaction reaction)
     {
         Emoji pin_react = new Emoji("📌");
@@ -32,8 +33,7 @@ public class Behaviors
         }
     }
 
-
-    public static async Task _DeleteDormsThreadIfAlreadyPresent(SocketThreadChannel chan)
+    public static async Task _DormsThreadCheck(SocketThreadChannel chan, ulong roleId)
     {
         var parent = chan.ParentChannel as SocketForumChannel;
         if (parent != null)
@@ -63,6 +63,8 @@ public class Behaviors
                         break;
                     }
                 }
+                // Add the Resident role
+                await chan.Owner.AddRoleAsync(roleId);
             }
         }
     }
