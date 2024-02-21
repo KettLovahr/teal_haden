@@ -11,15 +11,12 @@ public class Behaviors
 
         if (reaction.Emote.ToString() == pin_react.ToString())
         {
-            int count = message.Reactions[pin_react].NormalCount;
-            // Pin message if it gets enough Pin reactions
-            if (count >= 5) { await message.PinAsync(); }
-            // Pin message if it is in a thread and the reaction was given
-            // by the author of the thread
             if (channel is SocketThreadChannel threadchan)
             {
-                if (threadchan.Owner.Id == reaction.UserId) { await message.PinAsync(); }
+                if (threadchan.Owner.Id == reaction.UserId) { await message.PinAsync(); return; }
             }
+            int count = message.Reactions[pin_react].NormalCount;
+            if (count >= 5) { await message.PinAsync(); }
         }
     }
     public static async Task _UnpinMessageOnReact(IUserMessage message, IMessageChannel channel, SocketReaction reaction)
