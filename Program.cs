@@ -7,7 +7,8 @@ internal class Program
 {
     private static DiscordSocketClient? _client;
 
-    public struct Config {
+    public struct Config
+    {
         public string token;
         public ulong dorms_role;
     }
@@ -63,7 +64,8 @@ internal class Program
         await Behaviors._UnpinMessageOnReact(message, channel, reaction);
     }
 
-    private static Config GetConfig() {
+    private static Config GetConfig()
+    {
         return JsonConvert.DeserializeObject<Config>(File.ReadAllText("./config.json"));
     }
 
