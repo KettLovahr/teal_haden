@@ -1,7 +1,8 @@
-﻿namespace TealHadenBehaviors;
+﻿namespace teal_haden;
 using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
+
 
 public class Behaviors
 {
@@ -35,8 +36,7 @@ public class Behaviors
 
     public static async Task _DormsThreadCheck(SocketThreadChannel chan, ulong roleId)
     {
-        var parent = chan.ParentChannel as SocketForumChannel;
-        if (parent != null)
+        if (chan.ParentChannel is SocketForumChannel parent)
         {
             var threads = await parent.GetActiveThreadsAsync();
             if (parent.Name == "dorms")

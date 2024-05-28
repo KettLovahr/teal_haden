@@ -1,7 +1,7 @@
-﻿using Discord;
+namespace teal_haden;
+using Discord;
 using Discord.WebSocket;
 using Newtonsoft.Json;
-using TealHadenBehaviors;
 
 internal class Program
 {
